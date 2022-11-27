@@ -21,6 +21,12 @@ def giveemloyeeslist():
             print(i.name)
     startmessage()
 
+def givesalarylist():
+    if len(employees) > 0:
+        for i in employees:
+            print(i.name,i.salary)
+    startmessage()    
+
 def salarystats():
     sum = 0
     if len(employees) > 0:
@@ -49,13 +55,23 @@ def minandmaxsalary():
         print(employees[imax].name, "has the highest salary, it's", employees[imax].salary)
     startmessage()
 
+def raisesalaries():
+    if len(employees) > 0:
+        print("put persentage of raise")
+        p = 1+int(input())/100
+        for i in employees:
+            i.salary *= p
+        givesalarylist()
+    startmessage()
+
 def startmessage():
     print("Hi!")
     print("Send 1 to input a new employee!")
     print("Send 2 to get a list of employees!")
     print("Senf 3 to find total expenses and average salary")
-    print("Senf 4 to find minimum and maximum salary")
-    
+    print("Send 4 to find minimum and maximum salary")
+    print("Send 5 to raise wages")
+
     newinput = int(input())
     if newinput == 1:
         newemployee()
@@ -65,5 +81,7 @@ def startmessage():
         salarystats()
     elif newinput == 4:
         minandmaxsalary()
+    elif newinput == 5:
+        raisesalaries()
 
 startmessage()
