@@ -18,23 +18,28 @@ def newemployee(dep):
     e = Employee(n,s,d)
     employees.append(e)
     print("New employee",e.name,"was added in department",e.department,"with salary",e.salary)
-    startmessage()
 
-def giveemloyeeslist(dep):
+def giveemloyeeslist(dep, withnumbers = False):
     if len(employees) > 0:
+        iter = 0
         for i in employees:
             if i.department == dep:
-                print(i.name)
+                if withnumbers:
+                    print("#",iter, i.name)
+                else:
+                    print(i.name)
             elif dep == 0:
-                print(i.name,"department #",i.department)
-    startmessage()
+                if withnumbers:
+                    print("#",i.name,"department #",i.department)
+                else:
+                    print(i.name,"department #",i.department)
+            iter += 1
 
 def givesalarylist(dep):
     if len(employees) > 0:
         for i in employees:
             if i.department == dep or dep == 0:
-                print(i.name,i.salary)
-    startmessage()    
+                print(i.name,i.salary)  
 
 def salarystats(dep):
     sum = 0
@@ -48,7 +53,6 @@ def salarystats(dep):
         print("In department #",dep)
     print("Sum is", sum)
     print("Average salary is", sum/count)
-    startmessage()
 
 def minandmaxsalary(dep):
     if len(employees) > 0:
@@ -70,7 +74,6 @@ def minandmaxsalary(dep):
             print("In department #",dep)
         print(employees[imin].name, "has the lowest salary, only", employees[imin].salary)
         print(employees[imax].name, "has the highest salary, it's", employees[imax].salary)
-    startmessage()
 
 def raisesalaries(dep):
     if len(employees) > 0:
@@ -80,7 +83,14 @@ def raisesalaries(dep):
             if i.department == dep or dep == 0:
                 i.salary *= p
         givesalarylist(dep)
-    startmessage()
+
+def removeemployee(dep):
+    giveemloyeeslist(dep,True)
+    print("Send # of employee to delete")
+    i = int(input())
+    name = employees[i].name
+    employees.pop(i)
+    print(name, "left our company. Bye-bye!")
 
 def startmessage():
     print("Hi! Select the department or send 0 to work with every employee")
@@ -92,6 +102,7 @@ def startmessage():
     print("Send 4 to find minimum and maximum salary")
     print("Send 5 to raise wages")
     print("Send 6 to get stats for department")
+    print("Send 7 to remove employee")
     
     newinput = int(input())
     if newinput == 1:
@@ -106,6 +117,9 @@ def startmessage():
         raisesalaries(dep)
     elif newinput == 6:
         givesalarylist(dep)
+    elif newinput == 7:
+        removeemployee(dep)
+    startmessage()
 
 employees.append(Employee("Azamat",250000,1))
 employees.append(Employee("Lida",95000,1))
