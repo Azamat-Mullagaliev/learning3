@@ -30,10 +30,11 @@ def giveemloyeeslist(dep, withnumbers = False):
                     print(i.name)
             elif dep == 0:
                 if withnumbers:
-                    print("#",i.name,"department #",i.department)
+                    print("#",iter,i.name,"department #",i.department)
                 else:
                     print(i.name,"department #",i.department)
             iter += 1
+
 
 def givesalarylist(dep):
     if len(employees) > 0:
@@ -89,7 +90,8 @@ def removeemployee(dep):
     print("Send # of employee to delete")
     i = int(input())
     name = employees[i].name
-    employees.pop(i)
+    del employees[i]
+    #employees.pop(i)
     print(name, "left our company. Bye-bye!")
 
 def startmessage():
@@ -108,7 +110,7 @@ def startmessage():
     if newinput == 1:
         newemployee(dep)
     elif newinput == 2:
-        giveemloyeeslist(dep)
+        giveemloyeeslist(dep,True)
     elif newinput == 3:
         salarystats(dep)
     elif newinput == 4:
